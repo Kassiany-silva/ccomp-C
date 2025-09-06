@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+// Protótipo das funções
+int bissexto(int ano);
+int calculardia(int dia, int mes, int ano);
+
+// Função principal
+int main() {
+    int dia, mes, ano, total;
+
+    printf("Informe a data no formato DDMMAAAA: ");
+    scanf("%d%d%d", &dia, &mes, &ano);
+
+    total = calculardia(dia, mes, ano);
+    printf("%d dias no ano\n", total);
+
+    return 0;
+}
+
+//implementando as funções 
+int bissexto(int ano) {
+    if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
+        return 1; 
+    } else 
+        return 0; 
+    
+}
+
+
+int calculardia(int dia, int mes, int ano) {
+    int dias[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int i;
+    int diano = 0;
+
+    
+    if (bissexto(ano)) {
+        dias[1] = 29;
+    }
+
+    for (i = 0; i < mes - 1; i++) {
+        diano += dias[i];
+    }
+
+    diano += dia;
+
+    return diano;
+}
